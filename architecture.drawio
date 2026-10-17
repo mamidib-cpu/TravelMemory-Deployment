@@ -1,0 +1,30 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="TravelMemory Architecture" id="tm-arch">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" page="1" pageWidth="1200" pageHeight="800">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="user" value="Users (Browser)" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="530" y="20" width="60" height="70" as="geometry"/></mxCell>
+        <mxCell id="cf" value="Cloudflare DNS&#xa;A: yourdomain.com -> Frontend EC2 IP&#xa;CNAME: api.yourdomain.com -> Backend ALB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="440" y="130" width="240" height="70" as="geometry"/></mxCell>
+        <mxCell id="vpc" value="AWS VPC / Region" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;verticalAlign=top;align=left;spacingLeft=8;" vertex="1" parent="1"><mxGeometry x="60" y="240" width="1000" height="520" as="geometry"/></mxCell>
+        <mxCell id="alb_fe" value="ALB - Frontend&#xa;(Target Group :80)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="150" y="290" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="alb_be" value="ALB - Backend&#xa;(Target Group :80, /health)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="760" y="290" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="fe1" value="Frontend EC2 #1&#xa;Nginx + React build" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="90" y="430" width="160" height="70" as="geometry"/></mxCell>
+        <mxCell id="fe2" value="Frontend EC2 #2&#xa;Nginx + React build" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="270" y="430" width="160" height="70" as="geometry"/></mxCell>
+        <mxCell id="be1" value="Backend EC2 #1&#xa;Nginx :80 -> Node :3000 (PM2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="690" y="430" width="170" height="70" as="geometry"/></mxCell>
+        <mxCell id="be2" value="Backend EC2 #2&#xa;Nginx :80 -> Node :3000 (PM2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="880" y="430" width="170" height="70" as="geometry"/></mxCell>
+        <mxCell id="db" value="MongoDB Atlas&#xa;(TLS, IP allow-list)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="780" y="620" width="150" height="100" as="geometry"/></mxCell>
+        <mxCell id="sg" value="Security Groups: ALB 80/443 from internet; EC2 80 only from ALB SG; SSH 22 from my IP only" style="text;html=1;whiteSpace=wrap;align=left;" vertex="1" parent="1"><mxGeometry x="90" y="640" width="500" height="50" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=classic;html=1;" edge="1" parent="1" source="user" target="cf"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="yourdomain.com" style="endArrow=classic;html=1;" edge="1" parent="1" source="cf" target="alb_fe"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="api.yourdomain.com" style="endArrow=classic;html=1;" edge="1" parent="1" source="cf" target="alb_be"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" style="endArrow=classic;html=1;" edge="1" parent="1" source="alb_fe" target="fe1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" style="endArrow=classic;html=1;" edge="1" parent="1" source="alb_fe" target="fe2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" style="endArrow=classic;html=1;" edge="1" parent="1" source="alb_be" target="be1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" style="endArrow=classic;html=1;" edge="1" parent="1" source="alb_be" target="be2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" style="endArrow=classic;html=1;" edge="1" parent="1" source="be1" target="db"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e9" style="endArrow=classic;html=1;" edge="1" parent="1" source="be2" target="db"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
